@@ -848,6 +848,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial cart UI
     updateCartUI();
 
+    // Init carousel (if present)
+    if (typeof initCarousel === 'function') initCarousel();
+
     // Product modal controls
     const modalOverlay = document.getElementById('productModalOverlay');
     const modalCloseBtn = document.getElementById('productModalClose');
@@ -974,5 +977,55 @@ function addToCartWithQuantity(productId, qty) {
     updateCartUI();
     showNotification('Produk ditambahkan ke keranjang');
     closeProductModal();
+}
+
+/* Carousel JS: simple slider with nav, indicators and auto-rotate */
+function initCarousel() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const indicatorsWrap = carousel.querySelector('.carousel-indicators');
+    let current = 0;
+    let intervalId = null;
+
+    // build indicators
+    slides.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.setAttribute('aria-label', `Slide ${i+1}`);
+        btn.addEventListener('click', () => goTo(i));
+        indicatorsWrap.appendChild(btn);
+    });
+
+    const indicators = Array.from(indicatorsWrap.querySelectorAll('button'));
+
+    function update() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        indicators.forEach((b, i) => b.classList.toggle('active', i === current));
+    }
+
+    function next() { current = (current + 1) % slides.length; update(); }
+    function prev() { current = (current - 1 + slides.length) % slides.length; update(); }
+    function goTo(i) { current = Math.max(0, Math.min(i, slides.length - 1)); update(); }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetAuto(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); resetAuto(); });
+
+    // auto rotate
+    function startAuto() { intervalId = setInterval(next, 5000); }
+    function stopAuto() { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
+    function resetAuto() { stopAuto(); startAuto(); }
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('touchstart', stopAuto);
+    carousel.addEventListener('touchend', startAuto);
+
+    // initialize
+    update();
+    startAuto();
 }
 

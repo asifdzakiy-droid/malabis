@@ -32,6 +32,7 @@ Generated initial README by automation.
 Website katalog produk e-commerce sederhana dengan teknologi HTML, CSS, dan JavaScript murni (tanpa framework).
 
 ## Fitur
+- Carousel homepage dengan gambar dummy (PRODUK/carousel1.jpg, carousel2.jpg, carousel3.jpg). Ganti dengan gambar busana sesuai kebutuhan.
 
 ✅ Layout responsif mobile-first  
 ✅ Daftar produk dengan nama, harga, gambar, deskripsi  

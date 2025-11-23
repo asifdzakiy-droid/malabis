@@ -12,11 +12,32 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="logo">Katalog Busana</h1>
-            <button class="cart-toggle" id="cartToggle">
-                <span>Keranjang</span>
-                <span class="cart-badge" id="cartBadge">0</span>
-            </button>
+            <!-- Carousel: promotional / hero images (dummy clothing images from Unsplash) -->
+            <section class="carousel" aria-label="Promosi">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="PRODUK/carousel1.jpg" alt="Busana - dummy 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="PRODUK/carousel2.jpg" alt="Busana - dummy 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="PRODUK/carousel3.jpg" alt="Busana - dummy 3">
+                    </div>
+                </div>
+                <button class="carousel-nav carousel-prev" aria-label="Sebelumnya">‹</button>
+                <button class="carousel-nav carousel-next" aria-label="Berikutnya">›</button>
+                <div class="carousel-indicators" role="tablist" aria-hidden="false"></div>
+            </section>
+                <img src="PRODUK/logo-malabis.png" alt="Malabis Store Logo" class="logo" style="height:56px;max-width:220px;object-fit:contain;">
+                <button class="cart-toggle" id="cartToggle" aria-label="Keranjang">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.25rem;">
+                      <path d="M6 6h15l-1.5 9h-13z" stroke="currentColor" stroke-width="2" fill="none"/>
+                      <circle cx="9" cy="21" r="1" fill="currentColor"/>
+                      <circle cx="18" cy="21" r="1" fill="currentColor"/>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
         </div>
     </header>
 
