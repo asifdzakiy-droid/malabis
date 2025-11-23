@@ -793,14 +793,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (checkoutBtnEl) checkoutBtnEl.addEventListener('click', checkoutToWhatsApp);
     document.getElementById('clearCartBtn').addEventListener('click', clearCart);
     
-    // Proceed from cart to order form (open order modal)
+    // Proceed from cart to order form (stepper inside sidebar)
     const proceedBtn = document.getElementById('proceedBtn');
     if (proceedBtn) proceedBtn.addEventListener('click', () => {
         if (cart.length === 0) {
             alert('Keranjang kosong. Silakan tambahkan produk terlebih dahulu.');
             return;
         }
-        openOrderModal();
+        showOrderStep();
     });
     
     // Wilayah dropdowns
@@ -857,15 +857,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeProductModal();
     });
 
-    // Order modal controls
-    const orderOverlay = document.getElementById('orderModalOverlay');
-    const orderModalClose = document.getElementById('orderModalClose');
-    const orderCancelBtn = document.getElementById('orderCancelBtn');
-    if (orderOverlay) orderOverlay.addEventListener('click', closeOrderModal);
-    if (orderModalClose) orderModalClose.addEventListener('click', closeOrderModal);
-    if (orderCancelBtn) orderCancelBtn.addEventListener('click', closeOrderModal);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeOrderModal();
+    // Cart stepper controls: back button inside order step
+    const backToCartBtn = document.getElementById('backToCartBtn');
+    if (backToCartBtn) backToCartBtn.addEventListener('click', () => {
+        showCartStep();
     });
 });
 
@@ -937,24 +932,23 @@ function closeProductModal() {
 }
 
 // Order modal open/close (form terpisah dari cart)
-function openOrderModal() {
-    const overlay = document.getElementById('orderModalOverlay');
-    const modal = document.getElementById('orderModal');
-    if (overlay) overlay.classList.add('active');
-    if (modal) modal.classList.add('active');
-    if (modal) modal.setAttribute('aria-hidden', 'false');
+// Cart stepper control: show order form inside cart sidebar
+function showOrderStep() {
+    const summary = document.getElementById('cartStepSummary');
+    const order = document.getElementById('cartStepOrder');
+    if (summary) summary.style.display = 'none';
+    if (order) order.style.display = 'block';
 
-    // focus ke field pertama
+    // focus first input
     const nameInput = document.getElementById('buyerName');
     if (nameInput) nameInput.focus();
 }
 
-function closeOrderModal() {
-    const overlay = document.getElementById('orderModalOverlay');
-    const modal = document.getElementById('orderModal');
-    if (overlay) overlay.classList.remove('active');
-    if (modal) modal.classList.remove('active');
-    if (modal) modal.setAttribute('aria-hidden', 'true');
+function showCartStep() {
+    const summary = document.getElementById('cartStepSummary');
+    const order = document.getElementById('cartStepOrder');
+    if (summary) summary.style.display = 'block';
+    if (order) order.style.display = 'none';
 }
 
 // Add to cart with quantity from modal

@@ -427,6 +427,20 @@ body {
     margin-bottom: 0.25rem;
 }
 
+/* Spacing adjustments for cart footer stepper */
+.cart-footer .cart-section-title {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.cart-footer .form-input {
+    margin-bottom: 0.5rem;
+}
+
+.cart-footer .btn {
+    margin-bottom: 0.5rem;
+}
+
 /* Toolbar */
 .toolbar {
     display: flex;
