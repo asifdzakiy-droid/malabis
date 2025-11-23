@@ -788,8 +788,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cartOverlay').addEventListener('click', closeCart);
     
     // Checkout and clear buttons
-    document.getElementById('checkoutBtn').addEventListener('click', checkoutToWhatsApp);
+    // checkoutBtn is inside the order modal; keep binding if present
+    const checkoutBtnEl = document.getElementById('checkoutBtn');
+    if (checkoutBtnEl) checkoutBtnEl.addEventListener('click', checkoutToWhatsApp);
     document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+    
+    // Proceed from cart to order form (open order modal)
+    const proceedBtn = document.getElementById('proceedBtn');
+    if (proceedBtn) proceedBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Keranjang kosong. Silakan tambahkan produk terlebih dahulu.');
+            return;
+        }
+        openOrderModal();
+    });
     
     // Wilayah dropdowns
     const provinceSelect = document.getElementById('buyerProvince');
@@ -843,6 +855,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProductModal);
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeProductModal();
+    });
+
+    // Order modal controls
+    const orderOverlay = document.getElementById('orderModalOverlay');
+    const orderModalClose = document.getElementById('orderModalClose');
+    const orderCancelBtn = document.getElementById('orderCancelBtn');
+    if (orderOverlay) orderOverlay.addEventListener('click', closeOrderModal);
+    if (orderModalClose) orderModalClose.addEventListener('click', closeOrderModal);
+    if (orderCancelBtn) orderCancelBtn.addEventListener('click', closeOrderModal);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeOrderModal();
     });
 });
 
@@ -908,6 +931,27 @@ function openProductModal(productId) {
 function closeProductModal() {
     const overlay = document.getElementById('productModalOverlay');
     const modal = document.getElementById('productModal');
+    if (overlay) overlay.classList.remove('active');
+    if (modal) modal.classList.remove('active');
+    if (modal) modal.setAttribute('aria-hidden', 'true');
+}
+
+// Order modal open/close (form terpisah dari cart)
+function openOrderModal() {
+    const overlay = document.getElementById('orderModalOverlay');
+    const modal = document.getElementById('orderModal');
+    if (overlay) overlay.classList.add('active');
+    if (modal) modal.classList.add('active');
+    if (modal) modal.setAttribute('aria-hidden', 'false');
+
+    // focus ke field pertama
+    const nameInput = document.getElementById('buyerName');
+    if (nameInput) nameInput.focus();
+}
+
+function closeOrderModal() {
+    const overlay = document.getElementById('orderModalOverlay');
+    const modal = document.getElementById('orderModal');
     if (overlay) overlay.classList.remove('active');
     if (modal) modal.classList.remove('active');
     if (modal) modal.setAttribute('aria-hidden', 'true');

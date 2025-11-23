@@ -55,30 +55,12 @@
                 <span>Total:</span>
                 <span id="cartTotal">Rp0</span>
             </div>
-            
-            <div class="cart-section-title">Data Pembeli</div>
-            <input type="text" id="buyerName" class="form-input" placeholder="Nama Pembeli *" required>
-            <input type="text" id="buyerPhone" class="form-input" placeholder="No. WhatsApp *" required>
-            
-            <div class="cart-section-title">Alamat Pengiriman</div>
-            <select id="buyerProvince" class="form-input" required>
-                <option value="">Pilih Provinsi *</option>
-            </select>
-            <select id="buyerCity" class="form-input" disabled required>
-                <option value="">Pilih Kabupaten/Kota *</option>
-            </select>
-            <select id="buyerDistrict" class="form-input" disabled required>
-                <option value="">Pilih Kecamatan *</option>
-            </select>
-            <select id="buyerVillage" class="form-input" disabled required>
-                <option value="">Pilih Desa/Kelurahan *</option>
-            </select>
-            <textarea id="buyerAddressDetail" class="form-input" rows="2" placeholder="Detail Alamat (Nama Jalan, Nomor Rumah, RT/RW, dll) *" required></textarea>
-            
-            <input type="text" id="buyerNote" class="form-input" placeholder="Catatan (Opsional)">
-            
-            <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout via WhatsApp</button>
-            <button class="btn btn-secondary btn-block" id="clearCartBtn">Kosongkan Keranjang</button>
+
+            <!-- Hanya tampilkan ringkasan keranjang dan tombol lanjut ke pemesanan -->
+            <div style="margin-top:0.75rem;">
+                <button class="btn btn-primary btn-block" id="proceedBtn">Lanjut ke Pemesanan</button>
+                <button class="btn btn-secondary btn-block" id="clearCartBtn">Kosongkan Keranjang</button>
+            </div>
         </div>
     </aside>
 
@@ -108,6 +90,45 @@
                             <button class="qty-btn" id="modalQtyPlus">+</button>
                         </div>
                         <button class="btn btn-primary" id="modalAddToCart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Form Modal (dipisahkan dari cart) -->
+    <div class="modal-overlay" id="orderModalOverlay" style="display:none"></div>
+    <div class="product-modal" id="orderModal" aria-hidden="true">
+        <div class="product-modal-card">
+            <button class="modal-close" id="orderModalClose" aria-label="Tutup">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-body" style="width:100%">
+                    <h2 class="modal-title">Formulir Pemesanan</h2>
+
+                    <div class="cart-section-title">Data Pembeli</div>
+                    <input type="text" id="buyerName" class="form-input" placeholder="Nama Pembeli *" required>
+                    <input type="text" id="buyerPhone" class="form-input" placeholder="No. WhatsApp *" required>
+
+                    <div class="cart-section-title">Alamat Pengiriman</div>
+                    <select id="buyerProvince" class="form-input" required>
+                        <option value="">Pilih Provinsi *</option>
+                    </select>
+                    <select id="buyerCity" class="form-input" disabled required>
+                        <option value="">Pilih Kabupaten/Kota *</option>
+                    </select>
+                    <select id="buyerDistrict" class="form-input" disabled required>
+                        <option value="">Pilih Kecamatan *</option>
+                    </select>
+                    <select id="buyerVillage" class="form-input" disabled required>
+                        <option value="">Pilih Desa/Kelurahan *</option>
+                    </select>
+                    <textarea id="buyerAddressDetail" class="form-input" rows="2" placeholder="Detail Alamat (Nama Jalan, Nomor Rumah, RT/RW, dll) *" required></textarea>
+
+                    <input type="text" id="buyerNote" class="form-input" placeholder="Catatan (Opsional)">
+
+                    <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
+                        <button class="btn btn-primary" id="checkoutBtn">Checkout via WhatsApp</button>
+                        <button class="btn btn-secondary" id="orderCancelBtn">Batal</button>
                     </div>
                 </div>
             </div>
