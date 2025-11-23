@@ -540,52 +540,50 @@ function checkoutToWhatsApp() {
     }
     
     // Format pesan seperti struk dengan WhatsApp formatting
-    let message = '';
-    message += '*━━━━━━━━━━━━━━━━━━━━━━━━━━━━*\n';
-    message += '*          STRUK PEMESANAN          *\n';
-    message += '*━━━━━━━━━━━━━━━━━━━━━━━━━━━━*\n\n';
-    
-    message += '*📦 DETAIL PEMESANAN*\n';
-    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-    
+    let message = '✨ *STRUK PEMESANAN* ✨\n';
+    message += '=========================\n\n';
+
+    message += '📦 *Detail Pesanan*\n';
+    message += '-------------------------\n';
+
     cart.forEach((item, index) => {
         const unit = getUnitPriceForItem(item);
         const subtotal = unit * item.quantity;
-        message += `${index + 1}. *${item.name}*\n`;
-        message += `   Kode: \`${item.code}\`\n`;
-        message += `   Qty: ${item.quantity} x ${formatRupiah(unit)}\n`;
-        message += `   Subtotal: *${formatRupiah(subtotal)}*\n\n`;
+
+        message += `\n${index + 1}. *${item.name}*\n`;
+        message += `🆔 Kode: \`${item.code}\`\n`;
+        message += `🔢 Qty: ${item.quantity} × ${formatRupiah(unit)}\n`;
+        message += `💰 Subtotal: *${formatRupiah(subtotal)}*\n`;
     });
-    
-    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
-    message += `*TOTAL: ${formatRupiah(getCartTotal())}*\n`;
-    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-    
-    message += '*👤 DATA PEMBELI*\n';
-    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+
+    message += '\n=========================\n';
+    message += `🧾 *TOTAL: ${formatRupiah(getCartTotal())}*\n`;
+    message += '=========================\n\n';
+
+    message += '👤 *Data Pembeli*\n';
+    message += '-------------------------\n';
     message += `Nama: *${buyerName}*\n`;
     message += `WhatsApp: *${buyerPhone}*\n\n`;
-    
-    message += '*📍 ALAMAT PENGIRIMAN*\n';
-    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+
+    message += '📍 *Alamat Pengiriman*\n';
+    message += '-------------------------\n';
     message += `${buyerAddressDetail}\n`;
     message += `${buyerVillage}, ${buyerDistrict}\n`;
     message += `${buyerCity}, ${buyerProvince}\n\n`;
-    
+
     if (buyerNote) {
-        message += '*📝 CATATAN*\n';
-        message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+        message += '📝 *Catatan*\n';
+        message += '-------------------------\n';
         message += `${buyerNote}\n\n`;
     }
+
     
-    message += '*━━━━━━━━━━━━━━━━━━━━━━━━━━━━*\n';
-    message += '_Terima kasih atas pemesanan Anda_\n';
-    message += '*━━━━━━━━━━━━━━━━━━━━━━━━━━━━*';
-    
+
+    // Encode & open WhatsApp
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}/?text=${encodedMessage}`;
-    
     window.open(whatsappUrl, '_blank');
+
 }
 
 // Cart Sidebar Controls
