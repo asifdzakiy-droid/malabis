@@ -11,38 +11,45 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <!-- Carousel: promotional / hero images (dummy clothing images from Unsplash) -->
-            <section class="carousel" aria-label="Promosi">
-                <div class="carousel-track">
-                    <div class="carousel-slide">
-                        <img src="PRODUK/carousel1.jpg" alt="Busana - dummy 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="PRODUK/carousel2.jpg" alt="Busana - dummy 2">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="PRODUK/carousel3.jpg" alt="Busana - dummy 3">
-                    </div>
-                </div>
-                <button class="carousel-nav carousel-prev" aria-label="Sebelumnya">‹</button>
-                <button class="carousel-nav carousel-next" aria-label="Berikutnya">›</button>
-                <div class="carousel-indicators" role="tablist" aria-hidden="false"></div>
-            </section>
-                <img src="PRODUK/logo-malabis.png" alt="Malabis Store Logo" class="logo" style="height:56px;max-width:220px;object-fit:contain;">
-                <button class="cart-toggle" id="cartToggle" aria-label="Keranjang">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.25rem;">
-                      <path d="M6 6h15l-1.5 9h-13z" stroke="currentColor" stroke-width="2" fill="none"/>
-                      <circle cx="9" cy="21" r="1" fill="currentColor"/>
-                      <circle cx="18" cy="21" r="1" fill="currentColor"/>
-                    </svg>
-                    <span class="cart-badge" id="cartBadge">0</span>
-                </button>
+        <div class="container header-inner">
+            <a class="brand" href="#">
+                <img src="logo-malabis.png" alt="Malabis" class="brand-logo" onerror="this.style.display='none'">
+                <span class="brand-text">Katalog Busana</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#" class="nav-item">Beranda</a>
+                <a href="#products" class="nav-item">Produk</a>
+                <a href="#" class="nav-item">Kontak</a>
+            </nav>
+
+            <button class="cart-toggle" id="cartToggle">
+                <span>Keranjang</span>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main">
+        <!-- Carousel: use local images carousel1 - carousel3 -->
+        <section class="carousel" aria-label="Promosi">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="carousel1.jpg" alt="Busana - slide 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="carousel2.jpg" alt="Busana - slide 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="carousel3.jpg" alt="Busana - slide 3">
+                </div>
+            </div>
+            <button class="carousel-nav carousel-prev" aria-label="Sebelumnya">‹</button>
+            <button class="carousel-nav carousel-next" aria-label="Berikutnya">›</button>
+            <div class="carousel-indicators" role="tablist" aria-hidden="false"></div>
+        </section>
+
         <div class="container">
             <div class="toolbar">
                 <select id="categoryFilter" class="form-input">
@@ -56,61 +63,36 @@
             </div>
             <div id="loadingMessage" class="loading" style="display: none;">Memuat data produk...</div>
             <div class="products-grid" id="productsGrid">
-                <header class="header">
-                    <div class="container header-flex">
-                        <div class="header-logo">
-                            <img src="PRODUK/logo-malabis.png" alt="Malabis Store Logo" class="logo" style="height:56px;max-width:220px;object-fit:contain;">
-                        </div>
-                        <div class="header-cart">
-                            <button class="cart-toggle" id="cartToggle" aria-label="Keranjang">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
-                                  <path d="M6 6h15l-1.5 9h-13z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                  <circle cx="9" cy="21" r="1" fill="currentColor"/>
-                                  <circle cx="18" cy="21" r="1" fill="currentColor"/>
-                                </svg>
-                                <span class="cart-badge" id="cartBadge">0</span>
-                            </button>
-                        </div>
-                    </div>
-                </header>
-    
-                <!-- Main Content -->
-                <main class="main">
-                    <div class="container">
-                        <div class="toolbar">
-                            <select id="categoryFilter" class="form-input">
-                                <option value="">Semua Kategori</option>
-                            </select>
-                            <select id="sortFilter" class="form-input">
-                                <option value="">Urutkan: Default</option>
-                                <option value="price-asc">Harga: Rendah ke Tinggi</option>
-                                <option value="price-desc">Harga: Tinggi ke Rendah</option>
-                            </select>
-                        </div>
-                        <div id="loadingMessage" class="loading" style="display: none;">Memuat data produk...</div>
-                        <div class="products-grid" id="productsGrid">
-                            <!-- Products will be rendered here -->
-                        </div>
-                    </div>
-                </main>
+                <!-- Products will be rendered here -->
+            </div>
+        </div>
+    </main>
 
-                <!-- Carousel: promotional / hero images (dummy clothing images) -->
-                <section class="carousel" aria-label="Promosi">
-                    <div class="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="PRODUK/carousel1.jpg" alt="Busana - dummy 1">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="PRODUK/carousel2.jpg" alt="Busana - dummy 2">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="PRODUK/carousel3.jpg" alt="Busana - dummy 3">
-                        </div>
-                    </div>
-                    <button class="carousel-nav carousel-prev" aria-label="Sebelumnya">‹</button>
-                    <button class="carousel-nav carousel-next" aria-label="Berikutnya">›</button>
-                    <div class="carousel-indicators" role="tablist" aria-hidden="false"></div>
-                </section>
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Keranjang Belanja</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <!-- Cart items will be rendered here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rp0</span>
+            </div>
+
+            <!-- Stepper: summary (default) and order form (hidden) -->
+            <div class="cart-step cart-step-summary" id="cartStepSummary">
+                <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.5rem;">
+                    <button class="btn btn-primary btn-block" id="proceedBtn">Lanjut ke Pemesanan</button>
+                    <button class="btn btn-secondary btn-block" id="clearCartBtn">Kosongkan Keranjang</button>
+                </div>
+            </div>
+
+            <div class="cart-step cart-step-order" id="cartStepOrder" style="display:none;">
                 <div style="margin-top:0.5rem;">
                     <button class="btn btn-secondary" id="backToCartBtn">&larr; Kembali</button>
                 </div>
