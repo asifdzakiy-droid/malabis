@@ -12,19 +12,29 @@
     <!-- Header -->
     <header class="header">
         <div class="container header-inner">
-            <a class="brand" href="#" aria-label="Malabis">
-                <img src="logo-malabis.png" alt="Malabis" class="brand-logo" onerror="this.style.display='none'">
-            </a>
+            <div style="flex:1;display:flex;justify-content:center;align-items:center;">
+                <a class="brand" href="#" aria-label="Malabis">
+                    <img src="logo-malabis.png" alt="Malabis" class="brand-logo" style="width:160px; height:auto; display:block; object-fit:contain;" onerror="this.style.display='none'">
+                </a>
+            </div>
 
-            <nav class="nav-links" aria-label="Main navigation">
+            <!-- <nav class="nav-links" aria-label="Main navigation">
                 <a href="#" class="nav-item">Beranda</a>
                 <a href="#products" class="nav-item">Produk</a>
                 <a href="#" class="nav-item">Kontak</a>
-            </nav>
+            </nav> -->
 
-            <button class="cart-toggle" id="cartToggle">
-                <span>Keranjang</span>
-                <span class="cart-badge" id="cartBadge">0</span>
+            <button class="cart-toggle icon-button" id="cartToggle" aria-label="Buka Keranjang" title="Keranjang"
+                style="position:relative;width:48px;height:48px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;background:#fff;color:#222;box-shadow:0 1px 6px rgba(0,0,0,0.08);align-self:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <path d="M3 3h2l2.4 9.6A2 2 0 0 0 9.3 15h8.4a2 2 0 0 0 1.9-1.4L22 6H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="19" r="1.5" fill="currentColor"/>
+                    <circle cx="18" cy="19" r="1.5" fill="currentColor"/>
+                </svg>
+                <span class="cart-badge" id="cartBadge" aria-live="polite" aria-atomic="true"
+                  style="position:absolute;top:6px;right:6px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#e53935;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,0.25);">
+                0
+                </span>
             </button>
         </div>
     </header>
@@ -32,7 +42,7 @@
     <!-- Main Content -->
     <main class="main">
         <!-- Carousel: use local images carousel1 - carousel3 -->
-        <section class="carousel" aria-label="Promosi">
+        <!-- <section class="carousel" aria-label="Promosi">
             <div class="carousel-track">
                 <div class="carousel-slide">
                     <img src="PRODUK/carousel1.jpg" alt="Busana - slide 1">
@@ -47,7 +57,7 @@
             <button class="carousel-nav carousel-prev" aria-label="Sebelumnya">‹</button>
             <button class="carousel-nav carousel-next" aria-label="Berikutnya">›</button>
             <div class="carousel-indicators" role="tablist" aria-hidden="false"></div>
-        </section>
+        </section> -->
 
         <div class="container">
             <div class="toolbar">
@@ -75,7 +85,37 @@
             <button class="cart-close" id="cartClose">&times;</button>
         </div>
         <div class="cart-body" id="cartBody">
-            <!-- Cart items will be rendered here -->
+            <div id="cartItemsContainer"><!-- Cart items will be rendered here --></div>
+
+            <!-- ORDER FORM: placed inside cart-body so it scrolls with items -->
+            <div class="cart-step cart-step-order" id="cartStepOrder" style="display:none;">
+                <div style="margin-top:0.5rem;">
+                    <!-- <button class="btn btn-secondary" id="backToCartBtn">&larr; Kembali</button> -->
+                                     <div class="cart-section-title mb-2">Data Pembeli</div>
+                <input type="text" id="buyerName" class="form-input mb-2" placeholder="Nama Pembeli *" required>
+                <input type="text" id="buyerPhone" class="form-input mb-2" placeholder="No. WhatsApp *" required>
+
+                <div class="cart-section-title mb-2">Alamat Pengiriman</div>
+                <select id="buyerProvince" class="form-input mb-2" required>
+                    <option value="">Pilih Provinsi *</option>
+                </select>
+                <select id="buyerCity" class="form-input mb-2" disabled required>
+                    <option value="">Pilih Kabupaten/Kota *</option>
+                </select>
+                <select id="buyerDistrict" class="form-input mb-2" disabled required>
+                    <option value="">Pilih Kecamatan *</option>
+                </select>
+                <select id="buyerVillage" class="form-input mb-2" disabled required>
+                    <option value="">Pilih Desa/Kelurahan *</option>
+                </select>
+                <textarea id="buyerAddressDetail" class="form-input mb-2" rows="2" placeholder="Detail Alamat (Nama Jalan, Nomor Rumah, RT/RW, dll) *" required></textarea>
+
+                <input type="text" id="buyerNote" class="form-input mb-2" placeholder="Catatan (Opsional)">
+
+                </div>
+
+                <!-- NOTE: Checkout button moved to footer so it is always visible -->
+            </div>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
@@ -83,7 +123,7 @@
                 <span id="cartTotal">Rp0</span>
             </div>
 
-            <!-- Stepper: summary (default) and order form (hidden) -->
+            <!-- Footer: only actions (summary or order actions) -->
             <div class="cart-step cart-step-summary" id="cartStepSummary">
                 <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.5rem;">
                     <button class="btn btn-primary btn-block" id="proceedBtn">Lanjut ke Pemesanan</button>
@@ -91,33 +131,9 @@
                 </div>
             </div>
 
-            <div class="cart-step cart-step-order" id="cartStepOrder" style="display:none;">
-                <div style="margin-top:0.5rem;">
-                    <button class="btn btn-secondary" id="backToCartBtn">&larr; Kembali</button>
-                </div>
-
-                <div class="cart-section-title">Data Pembeli</div>
-                <input type="text" id="buyerName" class="form-input" placeholder="Nama Pembeli *" required>
-                <input type="text" id="buyerPhone" class="form-input" placeholder="No. WhatsApp *" required>
-
-                <div class="cart-section-title">Alamat Pengiriman</div>
-                <select id="buyerProvince" class="form-input" required>
-                    <option value="">Pilih Provinsi *</option>
-                </select>
-                <select id="buyerCity" class="form-input" disabled required>
-                    <option value="">Pilih Kabupaten/Kota *</option>
-                </select>
-                <select id="buyerDistrict" class="form-input" disabled required>
-                    <option value="">Pilih Kecamatan *</option>
-                </select>
-                <select id="buyerVillage" class="form-input" disabled required>
-                    <option value="">Pilih Desa/Kelurahan *</option>
-                </select>
-                <textarea id="buyerAddressDetail" class="form-input" rows="2" placeholder="Detail Alamat (Nama Jalan, Nomor Rumah, RT/RW, dll) *" required></textarea>
-
-                <input type="text" id="buyerNote" class="form-input" placeholder="Catatan (Opsional)">
-
+            <div id="orderFooterActions" style="display:none;">
                 <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
+                    <button class="btn btn-secondary" id="backFooterBtn">Kembali</button>
                     <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout via WhatsApp</button>
                 </div>
             </div>
@@ -155,9 +171,44 @@
             </div>
         </div>
     </div>
+<!-- back to top -->
+<button class="back-to-top icon-button" aria-label="Kembali ke Atas" onclick="scrollToTop()">
+    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M7 15l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
 
-    <!-- Order form is now inside the cart sidebar as a stepper -->
-
-    <script src="app.js"></script>
+<!-- Order form is now inside the cart sidebar as a stepper -->
+<script src="app.js"></script>
 </body>
+
+<script>
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<style>
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #e53935;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+}
+.back-to-top:hover {
+    background-color: #d32f2f;
+}
+</style>
 </html>

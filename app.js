@@ -461,14 +461,17 @@ function getCartCount() {
 
 // Render Cart
 function renderCart() {
+    const container = document.getElementById('cartItemsContainer');
     const cartBody = document.getElementById('cartBody');
-    
+
+    if (!container) return; // nothing to render into
+
     if (cart.length === 0) {
-        cartBody.innerHTML = '<div class="cart-empty">Keranjang kosong</div>';
+        container.innerHTML = '<div class="cart-empty">Keranjang kosong</div>';
         return;
     }
-    
-        cartBody.innerHTML = cart.map((item, index) => {
+
+    container.innerHTML = cart.map((item, index) => {
         const unit = getUnitPriceForItem(item);
         const subtotal = unit * item.quantity;
         // Pastikan item punya folder property
@@ -865,6 +868,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backToCartBtn) backToCartBtn.addEventListener('click', () => {
         showCartStep();
     });
+    // Back button located in footer when order step is active
+    const backFooterBtn = document.getElementById('backFooterBtn');
+    if (backFooterBtn) backFooterBtn.addEventListener('click', () => {
+        showCartStep();
+    });
 });
 
 // Make functions available globally
@@ -939,19 +947,31 @@ function closeProductModal() {
 function showOrderStep() {
     const summary = document.getElementById('cartStepSummary');
     const order = document.getElementById('cartStepOrder');
+    const orderFooter = document.getElementById('orderFooterActions');
     if (summary) summary.style.display = 'none';
+    if (orderFooter) orderFooter.style.display = 'flex';
     if (order) order.style.display = 'block';
 
-    // focus first input
-    const nameInput = document.getElementById('buyerName');
-    if (nameInput) nameInput.focus();
+    // reset scroll and focus first input for usability
+    const body = document.getElementById('cartBody');
+    if (body) body.scrollTop = 0;
+    setTimeout(() => {
+        const nameInput = document.getElementById('buyerName');
+        if (nameInput) nameInput.focus();
+    }, 50);
 }
 
 function showCartStep() {
     const summary = document.getElementById('cartStepSummary');
     const order = document.getElementById('cartStepOrder');
-    if (summary) summary.style.display = 'block';
+    const orderFooter = document.getElementById('orderFooterActions');
+    if (summary) summary.style.display = 'flex';
+    if (orderFooter) orderFooter.style.display = 'none';
     if (order) order.style.display = 'none';
+
+    // reset scroll
+    const body = document.getElementById('cartBody');
+    if (body) body.scrollTop = 0;
 }
 
 // Add to cart with quantity from modal

@@ -352,12 +352,7 @@ body {
 }
 
 /* Pastikan cart-body selalu terlihat */
-@media (max-height: 800px) {
-    .cart-body {
-        max-height: 40vh;
-        min-height: 150px;
-    }
-}
+
 
 .cart-empty {
     text-align: center;
@@ -452,22 +447,31 @@ body {
 }
 
 .cart-footer {
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 0.75rem;
     border-top: 2px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.15rem;
     background-color: var(--card-background);
     flex-shrink: 0;
-    /* keep footer visible at bottom of sidebar */
     position: sticky;
     bottom: 0;
-    z-index: 20;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    z-index: 1020;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
 }
 
-@media (max-height: 800px) {
+@media (max-width: 520px) {
     .cart-footer {
-        max-height: 45vh;
+        padding: 0.25rem 0.5rem;
+        gap: 0.1rem;
+        box-shadow: 0 -1px 6px rgba(0,0,0,0.06);
+    }
+    .cart-footer .btn {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.88rem;
     }
 }
 
@@ -491,7 +495,9 @@ body {
 }
 
 .cart-footer .btn {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
 }
 
 /* Toolbar */
@@ -872,5 +878,20 @@ select.form-input {
         transform: translateX(100%);
         opacity: 0;
     }
+}
+
+/* Spacing for order form inside cart sidebar */
+.cart-step-order .form-input,
+.cart-step-order select,
+.cart-step-order textarea,
+.cart-step-order .cart-section-title {
+    margin-bottom: 0.75rem;
+}
+.cart-step-order .cart-section-title {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+.cart-step-order .form-input:first-child {
+    margin-top: 0.5rem;
 }
 
