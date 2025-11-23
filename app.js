@@ -539,45 +539,44 @@ function checkoutToWhatsApp() {
         return;
     }
     
-    // Format pesan seperti struk dengan WhatsApp formatting
-    let message = '✨ *STRUK PEMESANAN* ✨\n';
-    message += '=========================\n\n';
+    let message = '*STRUK PEMESANAN*\n';
+    message += '=====================\n\n';
 
-    message += '📦 *Detail Pesanan*\n';
-    message += '-------------------------\n';
+    message += '*Detail Pesanan*\n';
+    message += '---------------------\n';
 
     cart.forEach((item, index) => {
         const unit = getUnitPriceForItem(item);
         const subtotal = unit * item.quantity;
 
         message += `\n${index + 1}. *${item.name}*\n`;
-        message += `🆔 Kode: \`${item.code}\`\n`;
-        message += `🔢 Qty: ${item.quantity} × ${formatRupiah(unit)}\n`;
-        message += `💰 Subtotal: *${formatRupiah(subtotal)}*\n`;
+        message += `Kode       : \`${item.code}\`\n`;
+        message += `Qty        : ${item.quantity} × ${formatRupiah(unit)}\n`;
+        message += `Subtotal   : *${formatRupiah(subtotal)}*\n`;
     });
 
-    message += '\n=========================\n';
-    message += `🧾 *TOTAL: ${formatRupiah(getCartTotal())}*\n`;
-    message += '=========================\n\n';
+    message += '\n=====================\n';
+    message += `*TOTAL*: ${formatRupiah(getCartTotal())}\n`;
+    message += '=====================\n\n';
 
-    message += '👤 *Data Pembeli*\n';
-    message += '-------------------------\n';
-    message += `Nama: *${buyerName}*\n`;
-    message += `WhatsApp: *${buyerPhone}*\n\n`;
+    message += '*Data Pembeli*\n';
+    message += '---------------------\n';
+    message += `Nama       : *${buyerName}*\n`;
+    message += `WhatsApp   : *${buyerPhone}*\n\n`;
 
-    message += '📍 *Alamat Pengiriman*\n';
-    message += '-------------------------\n';
+    message += '*Alamat Pengiriman*\n';
+    message += '---------------------\n';
     message += `${buyerAddressDetail}\n`;
     message += `${buyerVillage}, ${buyerDistrict}\n`;
     message += `${buyerCity}, ${buyerProvince}\n\n`;
 
     if (buyerNote) {
-        message += '📝 *Catatan*\n';
-        message += '-------------------------\n';
+        message += '*Catatan*\n';
+        message += '---------------------\n';
         message += `${buyerNote}\n\n`;
     }
 
-    
+    message += '_Terima kasih, pesanan Anda segera diproses._';
 
     // Encode & open WhatsApp
     const encodedMessage = encodeURIComponent(message);
